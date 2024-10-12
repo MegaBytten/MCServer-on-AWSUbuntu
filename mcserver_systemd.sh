@@ -1,10 +1,8 @@
 #!/bin/bash'
 
-# GLOBAL VARS
-# Get the directory where the script is located and being executed from
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-# Set CONFIG_FILE to be in the same directory as the script
-CONFIG_FILE="$SCRIPT_DIR/config.yaml"
+# Get config.yaml location based on Git Repo name
+PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu"
+CONFIG_FILE="${PROJFOLDERPATH}/config.yaml"
 
 SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
 

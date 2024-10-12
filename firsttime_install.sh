@@ -6,10 +6,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Get the directory where the script is located and being executed from
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-# Set CONFIG_FILE to be in the same directory as the script
-CONFIG_FILE="$SCRIPT_DIR/config.yaml"
 
 echo "Updating package lists..."
 sudo apt update >/dev/null
@@ -29,9 +25,16 @@ sudo apt-get install -y yq >/dev/null
 echo "Installing unzip for AWS installation..."
 sudo apt install unzip -y >/dev/null # 
 
+
+
+# Get config.yaml location based on Git Repo name
+PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu"
+CONFIG_FILE="${PROJFOLDERPATH}/config.yaml"
+
 # Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
 echo "Reading ubuntu_path from config.yaml..."
 UBUNTU_PATH=$(yq e '.ubuntu_path' "$CONFIG_FILE")
+
 
 
 # Installing AWS CLI so we can pull server from S3
