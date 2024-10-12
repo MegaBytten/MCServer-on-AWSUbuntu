@@ -18,7 +18,7 @@ After=network.target
 
 [Service]
 User=ubuntu
-WorkingDirectory=$HOME/mcserver
+WorkingDirectory=$UBUNTU_PATH/mcserver
 ExecStart=$COMMAND
 Restart=on-failure
 RestartSec=10

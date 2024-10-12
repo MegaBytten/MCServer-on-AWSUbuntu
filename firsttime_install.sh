@@ -19,18 +19,21 @@ sudo apt install openjdk-21-jre-headless -y
 sudo apt-get install -y yq
 
 
+# Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
+UBUNTU_PATH=(yq e '.ubuntu_path' "$CONFIG_FILE")
+
 # Installing AWS so we can pull server from S3
 sudo apt install unzip
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$HOME/awscliv2.zip"
-unzip $HOME/awscliv2.zip
-rm -rf $HOME/awscliv2.zip
-sudo $HOME/aws/install
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$UBUNTU_PATH/awscliv2.zip"
+unzip $UBUNTU_PATH/awscliv2.zip
+rm -rf $UBUNTU_PATH/awscliv2.zip
+$UBUNTU_PATH/aws/install
 
 # Make minecraft dir
-mkdir $HOME/mcserver
+mkdir $UBUNTU_PATH/mcserver
 
 # Install latest mc version from AWS S3
-sudo aws s3 cp s3://megabyttenpersonalmcserverbackups/latest $HOME/mcserver/ --recursive
+sudo aws s3 cp s3://megabyttenpersonalmcserverbackups/latest $UBUNTU_PATH/mcserver/ --recursive
 
 
 

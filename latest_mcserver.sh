@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directory containing Minecraft server files
-MC_DIR="$HOME/mcserver"
+MC_DIR="$UBUNTU_PATH/mcserver"
 
 # Check if the directory exists
 if [ ! -d "$MC_DIR" ]; then
