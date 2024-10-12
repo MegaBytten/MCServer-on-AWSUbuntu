@@ -11,6 +11,7 @@ MC_JAR_PATH=$(yq e '.mcserver_jar' "$CONFIG_FILE")
 COMMAND="/bin/java sudo -Xmx${MEMORY}M -Xms${MEMORY}M -jar $MC_JAR_PATH nogui"
 
 # Create or overwrite the .service file with the necessary content
+echo "Writing data to systemd service file: $SERVICE_FILE..."
 cat <<EOL > $SERVICE_FILE
 [Unit]
 Description=Minecraft Server
@@ -31,10 +32,10 @@ EOL
 chmod 644 $SERVICE_FILE
 
 # Reload systemd to acknowledge the new service file
+echo "Reloading systemctl"
 systemctl daemon-reload
 
 # Enable the Minecraft service so it starts on boot
+echo "Enabling and Starting $SERVICE_FILE..."
 systemctl enable minecraftserver.service
 systemctl start minecraftserver.service
-
-echo "Minecraft server service file created and enabled."
