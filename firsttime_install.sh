@@ -32,7 +32,7 @@ CONFIG_FILE="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
 
 # Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
 echo "Reading ubuntu_path from config.yaml..."
-UBUNTU_PATH=$(yq '.ubuntu_path' "$CONFIG_FILE")
+UBUNTU_PATH=$(yq -r '.ubuntu_path' "$CONFIG_FILE")
 
 
 
