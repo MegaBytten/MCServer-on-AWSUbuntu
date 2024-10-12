@@ -1,4 +1,4 @@
-ubuntu_path: /home/ubuntu/aws/install
+ubuntu_path: /home/ubuntu/
 mcserver_memory: "15000" # in MB
 mcserver_jar: ""
 
