@@ -1,8 +1,7 @@
 #!/bin/bash'
 
 # Get config.yaml location based on Git Repo name
-PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu"
-CONFIG_FILE="${PROJFOLDERPATH}/config.yaml"
+PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
 
 SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
 

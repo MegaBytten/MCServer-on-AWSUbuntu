@@ -28,8 +28,7 @@ sudo apt install unzip -y >/dev/null #
 
 
 # Get config.yaml location based on Git Repo name
-PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu"
-CONFIG_FILE="${PROJFOLDERPATH}/config.yaml"
+PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
 
 # Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
 echo "Reading ubuntu_path from config.yaml..."
