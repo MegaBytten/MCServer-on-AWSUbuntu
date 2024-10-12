@@ -28,7 +28,8 @@ sudo apt install unzip -y >/dev/null #
 
 
 # Get config.yaml location based on Git Repo name
-CONFIG_FILE="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
+PROJECT_DIR="/home/ubuntu/MCServer_on_AWSUbuntu"
+CONFIG_FILE="${PROJECT_DIR}/config.yaml"
 
 # Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
 echo "Reading ubuntu_path from config.yaml..."
@@ -55,7 +56,7 @@ sudo aws s3 cp s3://megabyttenpersonalmcserverbackups/latest "$UBUNTU_PATH/mcser
 
 
 # Call the script to find the latest Minecraft jar file and capture the output
-LATEST_JAR=$(bash latest_mcserver.sh)
+LATEST_JAR=$(bash ${PROJECT_DIR}/latest_mcserver.sh)
 
 # Check if the LATEST_JAR variable is not empty
 if [ -z "$LATEST_JAR" ]; then
@@ -72,7 +73,7 @@ yq w $CONFIG_FILE .mcserver_jar $LATEST_JAR
 
 # Run the mcserver_systemd.sh to create a systemD service for MC server
 echo "Launching SystemD job..."
-sudo bash mcserver_systend.sh
+sudo bash ${PROJECT_DIR}/mcserver_systend.sh
 
 IP=$(hostname -I | awk '{print $1}')
 echo "Installation complete, S3::Latest Minecraft server running on $IP" 
