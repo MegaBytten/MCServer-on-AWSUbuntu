@@ -18,6 +18,5 @@ if [ -z "$LATEST_JAR" ]; then
   exit 1
 fi
 
-echo "The latest Minecraft server file is: $LATEST_JAR"
-
-# Now you can use this $LATEST_JAR in your systemd service file setup or elsewhere
+# Output the path of the latest .jar file
+echo "$LATEST_JAR"
