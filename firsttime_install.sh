@@ -6,8 +6,10 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# GLOBAL VARS
-CONFIG_FILE="config.yaml"
+# Get the directory where the script is located and being executed from
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+# Set CONFIG_FILE to be in the same directory as the script
+CONFIG_FILE="$SCRIPT_DIR/config.yaml"
 
 echo "Updating package lists..."
 sudo apt update >/dev/null
