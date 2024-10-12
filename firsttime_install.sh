@@ -43,7 +43,7 @@ echo "Installing AWS CLI..."
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$UBUNTU_PATH/awscliv2.zip" >/dev/null
 unzip "$UBUNTU_PATH/awscliv2.zip" >/dev/null
 rm -rf "$UBUNTU_PATH/awscliv2.zip" >/dev/null
-$UBUNTU_PATH/aws/install >/dev/null
+$UBUNTU_PATH/aws/install -N >/dev/null
 
 # Make minecraft dir
 echo "Creating Minecraft server directory..."
@@ -60,5 +60,5 @@ sudo aws s3 cp s3://megabyttenpersonalmcserverbackups/latest "$UBUNTU_PATH/mcser
 echo "Launching SystemD job..."
 sudo bash ${PROJECT_DIR}/mcserver_systemd.sh
 
-IP=$(hostname -I | awk '{print $1}')
+IP=$(curl -s http://checkip.amazonaws.com)
 echo "Installation complete, S3::Latest Minecraft server running on $IP" 

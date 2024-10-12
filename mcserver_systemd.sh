@@ -11,7 +11,7 @@ MC_JAR_PATH=$(yq -r '.mcserver_jar' "$CONFIG_FILE")
 
 # File to write to
 SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
-COMMAND="/bin/java sudo -Xmx${MEMORY}M -Xms${MEMORY}M -jar $MC_JAR_PATH nogui"
+COMMAND="/bin/java -Xmx${MEMORY}M -Xms${MEMORY}M -jar $MC_JAR_PATH nogui"
 
 # Create or overwrite the .service file with the necessary content
 echo "Writing data to systemd service file: $SERVICE_FILE..."
