@@ -39,6 +39,7 @@ UBUNTU_PATH=$(yq '.ubuntu_path' "$CONFIG_FILE")
 # Installing AWS CLI so we can pull server from S3
 echo "Installing AWS CLI..."
 
+echo $UBUNTU_PATH
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$UBUNTU_PATH/awscliv2.zip" >/dev/null
 unzip "$UBUNTU_PATH/awscliv2.zip" >/dev/null
 rm -rf "$UBUNTU_PATH/awscliv2.zip" >/dev/null
