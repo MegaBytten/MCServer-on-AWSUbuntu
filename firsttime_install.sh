@@ -53,6 +53,11 @@ mkdir "$UBUNTU_PATH/mcserver"
 echo "Downloading the latest Minecraft version from S3..."
 sudo aws s3 cp s3://megabyttenpersonalmcserverbackups/latest "$UBUNTU_PATH/mcserver/" --recursive >/dev/null
 
+# Change ownership of the Minecraft server directory and all its contents
+sudo chown -R ubuntu:ubuntu /home/ubuntu/mcserver
+
+# Give read, write, and execute permissions to the owner (ubuntu)
+sudo chmod -R u+rwX /home/ubuntu/mcserver
 
 
 
