@@ -8,6 +8,8 @@ CONFIG_FILE="${PROJECT_DIR}/config.yaml"
 MEMORY=$(yq -r '.mcserver_memory' "$CONFIG_FILE")
 MC_JAR_PATH=$(yq -r '.mcserver_jar' "$CONFIG_FILE")
 
+echo "MEMORY = $MEMORY" >> logs.txt
+echo "MC_JAR_PATH = $MC_JAR_PATH" >> logs.txt
 
 # File to write to
 SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
