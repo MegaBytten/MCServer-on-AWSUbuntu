@@ -4,16 +4,13 @@
 PROJECT_DIR="/home/ubuntu/MCServer_on_AWSUbuntu"
 CONFIG_FILE="${PROJECT_DIR}/config.yaml"
 
-# Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
-echo "Reading ubuntu_path from config.yaml..."
-UBUNTU_PATH=$(yq -r '.ubuntu_path' "$CONFIG_FILE")
-
-SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
-
 # Use yq to extract config vals from config.yaml
-MEMORY=$(yq '.mcserver_memory' "$CONFIG_FILE")
-MC_JAR_PATH=$(yq '.mcserver_jar' "$CONFIG_FILE")
+MEMORY=$(yq -r '.mcserver_memory' "$CONFIG_FILE")
+MC_JAR_PATH=$(yq -r '.mcserver_jar' "$CONFIG_FILE")
 
+
+# File to write to
+SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
 COMMAND="/bin/java sudo -Xmx${MEMORY}M -Xms${MEMORY}M -jar $MC_JAR_PATH nogui"
 
 # Create or overwrite the .service file with the necessary content

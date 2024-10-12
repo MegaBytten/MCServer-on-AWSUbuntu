@@ -54,21 +54,7 @@ echo "Downloading the latest Minecraft version from S3..."
 sudo aws s3 cp s3://megabyttenpersonalmcserverbackups/latest "$UBUNTU_PATH/mcserver/" --recursive >/dev/null
 
 
-# Call the script to find the latest Minecraft jar file and capture the output
-LATEST_JAR=$(bash ${PROJECT_DIR}/latest_mcserver.sh)
 
-# Check if the LATEST_JAR variable is not empty
-if [ -z "$LATEST_JAR" ]; then
-  echo "Error: No Minecraft server .jar file found."
-  exit 1
-fi
-
-# Now you can use the $LATEST_JAR variable in other commands or scripts
-echo "The latest Minecraft server jar is: $LATEST_JAR"
-
-# Update the config.yaml file by setting the 'mcserver_jar' variable
-echo "Updating config.yaml with latest Minecraft server jar..."
-yq w $CONFIG_FILE .mcserver_jar $LATEST_JAR
 
 # Run the mcserver_systemd.sh to create a systemD service for MC server
 echo "Launching SystemD job..."

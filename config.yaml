@@ -1,4 +1,3 @@
 ubuntu_path: "/home/ubuntu"
 mcserver_memory: "15000" # in MB
-mcserver_jar: ""
-
+mcserver_jar: "/home/ubuntu/mcserver/minecraft_server.1.21.1.jar"
