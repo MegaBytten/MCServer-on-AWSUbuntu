@@ -1,13 +1,13 @@
 #!/bin/bash'
 
 # Get config.yaml location based on Git Repo name
-PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
+CONFIG_FILE="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
 
 SERVICE_FILE="/etc/systemd/system/minecraftserver.service"
 
 # Use yq to extract config vals from config.yaml
-MEMORY=$(yq e '.mcserver_memory' "$CONFIG_FILE")
-MC_JAR_PATH=$(yq e '.mcserver_jar' "$CONFIG_FILE")
+MEMORY=$(yq '.mcserver_memory' "$CONFIG_FILE")
+MC_JAR_PATH=$(yq '.mcserver_jar' "$CONFIG_FILE")
 
 COMMAND="/bin/java sudo -Xmx${MEMORY}M -Xms${MEMORY}M -jar $MC_JAR_PATH nogui"
 

@@ -28,11 +28,11 @@ sudo apt install unzip -y >/dev/null #
 
 
 # Get config.yaml location based on Git Repo name
-PROJFOLDERPATH="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
+CONFIG_FILE="/home/ubuntu/MCServer_on_AWSUbuntu/config.yaml"
 
 # Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
 echo "Reading ubuntu_path from config.yaml..."
-UBUNTU_PATH=$(yq e '.ubuntu_path' "$CONFIG_FILE")
+UBUNTU_PATH=$(yq '.ubuntu_path' "$CONFIG_FILE")
 
 
 
@@ -67,7 +67,7 @@ echo "The latest Minecraft server jar is: $LATEST_JAR"
 
 # Update the config.yaml file by setting the 'mcserver_jar' variable
 echo "Updating config.yaml with latest Minecraft server jar..."
-yq e -i ".mcserver_jar = \"$LATEST_JAR\"" "$CONFIG_FILE"
+yq w $CONFIG_FILE .mcserver_jar $LATEST_JAR
 
 # Run the mcserver_systemd.sh to create a systemD service for MC server
 echo "Launching SystemD job..."
