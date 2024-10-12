@@ -40,7 +40,6 @@ UBUNTU_PATH=$(yq -r '.ubuntu_path' "$CONFIG_FILE")
 # Installing AWS CLI so we can pull server from S3
 echo "Installing AWS CLI..."
 
-echo $UBUNTU_PATH
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$UBUNTU_PATH/awscliv2.zip" >/dev/null
 unzip "$UBUNTU_PATH/awscliv2.zip" >/dev/null
 rm -rf "$UBUNTU_PATH/awscliv2.zip" >/dev/null
@@ -73,7 +72,7 @@ yq w $CONFIG_FILE .mcserver_jar $LATEST_JAR
 
 # Run the mcserver_systemd.sh to create a systemD service for MC server
 echo "Launching SystemD job..."
-sudo bash ${PROJECT_DIR}/mcserver_systend.sh
+sudo bash ${PROJECT_DIR}/mcserver_systemd.sh
 
 IP=$(hostname -I | awk '{print $1}')
 echo "Installation complete, S3::Latest Minecraft server running on $IP" 

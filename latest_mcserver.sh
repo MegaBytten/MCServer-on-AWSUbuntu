@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Directory containing Minecraft server files
-MC_DIR="$UBUNTU_PATH/mcserver"
+PROJECT_DIR="/home/ubuntu/MCServer_on_AWSUbuntu"
+CONFIG_FILE="${PROJECT_DIR}/config.yaml"
+
+# Getting Ubuntu_path var, because sudo running command resolves $HOME to / (root)
+echo "Reading ubuntu_path from config.yaml..."
+UBUNTU_PATH=$(yq -r '.ubuntu_path' "$CONFIG_FILE")
+MCDIR="${UBUNTU_PATH}/mcserver"
 
 # Check if the directory exists
 if [ ! -d "$MC_DIR" ]; then
