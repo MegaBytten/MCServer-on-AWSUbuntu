@@ -17,4 +17,4 @@ echo "Reading ubuntu_path from config.yaml..."
 UBUNTU_PATH=$(yq -r '.ubuntu_path' "$CONFIG_FILE")
 
 # Download mods:
-wget -O $UBUNTU_PATH/mcserver/mods/comforts-1.21.jar https://www.curseforge.com/minecraft/mc-mods/comforts/download/5718737 >/dev/null
+wget -O $UBUNTU_PATH/mcserver/mods/comforts-1.21.jar https://www.curseforge.com/api/v1/mods/276951/files/5718737/download >/dev/null
