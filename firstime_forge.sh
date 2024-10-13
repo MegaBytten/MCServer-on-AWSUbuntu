@@ -19,7 +19,9 @@ mkdir $UBUNTU_PATH/forge
 wget -O $UBUNTU_PATH/forge/forge-1.21-installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/1.21.1-52.0.20/forge-1.21.1-52.0.20-installer.jar >/dev/null
 
 echo "installing forge..."
+cd $UBUNTU_PATH/forge
 java -jar $UBUNTU_PATH/forge/forge-1.21-installer.jar --installServer >/dev/null
+cd $UBUNTU_PATH
 
 echo "Moving forge server.jar to $UBUNTU_PATH/mcserver/"
 cp $UBUNTU_PATH/forge/forge-1.21.1-52.0.20-shim.jar $UBUNTU_PATH/mcserver
