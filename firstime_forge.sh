@@ -6,11 +6,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-
-echo "Installing openJDK Java JDK 21"
-sudo apt update >/dev/null
-sudo apt install openjdk-21-jdk-headless -y >/dev/null
-
 # Get config.yaml location based on Git Repo name
 PROJECT_DIR="/home/ubuntu/MCServer_on_AWSUbuntu"
 CONFIG_FILE="${PROJECT_DIR}/config.yaml"
@@ -26,5 +21,5 @@ wget -O $UBUNTU_PATH/forge/forge-1.21-installer.jar https://maven.minecraftforge
 echo "installing forge..."
 java -jar $UBUNTU_PATH/forge/forge-1.21-installer.jar --installServer >/dev/null
 
-echo "Moving forge server.jar to $UBUNTU_PATH/mcserver/
+echo "Moving forge server.jar to $UBUNTU_PATH/mcserver/"
 cp $UBUNTU_PATH/forge/forge-1.21.1-52.0.20-shim.jar $UBUNTU_PATH/mcserver
