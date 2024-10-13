@@ -24,7 +24,7 @@ echo "Copying installer and beginning forge installation inside $UBUNTU_PATH/mcs
 cp $UBUNTU_PATH/forge/forge-1.21-installer.jar $UBUNTU_PATH/mcserver
 cd $UBUNTU_PATH/mcserver # moving in here so installation occurs inside mcserver dir
 java -jar forge-1.21-installer.jar --installServer >/dev/null
-sudo rm forge-1.21-installer.jar # removing installer
+sudo rm forge-1.21-installer.jar && sudo rm forge-1.21-installer.jar.log && sudo rm run.bat && sudo rm run.sh
 mv forge-1.21.1-52.0.20-shim.jar forge-1.21.1-server.jar # renaming forge.jar
 cd $UBUNTU_PATH # return to normal WD
 
