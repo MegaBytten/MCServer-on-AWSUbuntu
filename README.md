@@ -33,7 +33,6 @@ To set up the Minecraft server on your AWS Ubuntu instance, follow these steps:
 ```
 git clone https://github.com/MegaBytten/MCServer_on_AWSUbuntu.git  
 cd MCServer_on_AWSUbuntu  
-
 ```
 
 ### Run the first-time setup script:
