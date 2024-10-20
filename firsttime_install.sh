@@ -59,8 +59,6 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/mcserver
 # Give read, write, and execute permissions to the owner (ubuntu)
 sudo chmod -R u+rwX /home/ubuntu/mcserver
 
-
-
 # Run the mcserver_systemd.sh to create a systemD service for MC server
 echo "Launching SystemD job..."
 sudo bash ${PROJECT_DIR}/mcserver_systemd.sh
