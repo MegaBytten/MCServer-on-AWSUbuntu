@@ -15,6 +15,14 @@ Mod Installation: Use forgemods_install.sh to download and install mods for the 
 Backup: Use s3upload.sh to back up the server to AWS S3.  
 For more information, see detailed usage at the bottom of README.md  
 
+## AWS EC2 Guidance:
+Instance type: t3.xlarge - 4 vCPUs, 16.0 GiB of memory, <=5 Gibps of bandwidth, Spot: $0.0553/hr
+Networking: EBS are AZ-specific, so if attaching a server drive ensure EC2 is deployed in same AZ
+Security Group: Ensure SSH (port 22) for connectivity, and port TCP/25565 for minecraft hosting.
+IAM Role: Needs S3 full access permission to get/set backups to S3.
+EBS Volume: EBS Pricing is provisioned! Cheaper to backup and read from S3 than run multiple EBS backups. Provision ~30GB max.
+Spot Instance: Ensure interruption-behaviour = STOP, not TERMINATE. Ensure spot request is PERSISTENT so you can STOP/START server.
+
 
 ## Requirements
 The scripts assume the server is running on an AWS Ubuntu instance, which has git pre-installed. The following dependencies will be installed by the scripts if they are not already available:  
