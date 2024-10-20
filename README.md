@@ -1,100 +1,100 @@
 # Minecraft Server Setup on AWS Ubuntu
-This repository contains a set of Bash scripts designed to automate the process of setting up a Minecraft (MC) server on an AWS Ubuntu instance. The server can be configured to run either Forge (for mods) or Spigot (for plugins). The scripts handle the installation of dependencies, configuration of the server, and setting up the server as a systemd service for easy management.
+This repository contains a set of Bash scripts designed to automate the process of setting up a Minecraft (MC) server on an AWS Ubuntu instance. The server can be configured to run either Forge (for mods) or Spigot (for plugins). The scripts handle the installation of dependencies, configuration of the server, and setting up the server as a systemd service for easy management.  
 
 
 ## Overview
-This project automates the setup of a Minecraft server on AWS Ubuntu. The scripts support both Forge (for modded Minecraft) and Spigot (for plugin support) and are primarily focused on initial server setup, as there are numerous dependencies and configurations required.
+This project automates the setup of a Minecraft server on AWS Ubuntu. The scripts support both Forge (for modded Minecraft) and Spigot (for plugin support) and are primarily focused on initial server setup, as there are numerous dependencies and configurations required.  
 
-The repository is designed to provide reproducibility for setting up a Minecraft server and can be used by anyone looking to host a server on AWS with the canonical Ubuntu AMI.
+The repository is designed to provide reproducibility for setting up a Minecraft server and can be used by anyone looking to host a server on AWS with the canonical Ubuntu AMI.  
 
 
 ## Summary of Usage:
-Initial Setup: Run firsttime_install.sh to install dependencies and set up the Minecraft server. Then, use either firsttime_spigot.sh or firsttime_forge.sh to install the specific server type. firsttime_install.sh will also download the latest/* files from s3.
-Systemd Service Management: Use mcserver_systemd.sh to set up the Minecraft server as a systemd service.
-Mod Installation: Use forgemods_install.sh to download and install mods for the Forge server.
-Backup: Use s3upload.sh to back up the server to AWS S3.
-For more information, see detailed usage at the bottom of README.md
+Initial Setup: Run firsttime_install.sh to install dependencies and set up the Minecraft server. Then, use either firsttime_spigot.sh or firsttime_forge.sh to install the specific server type. firsttime_install.sh will also download the latest/* files from s3.  
+Systemd Service Management: Use mcserver_systemd.sh to set up the Minecraft server as a systemd service.  
+Mod Installation: Use forgemods_install.sh to download and install mods for the Forge server.  
+Backup: Use s3upload.sh to back up the server to AWS S3.  
+For more information, see detailed usage at the bottom of README.md  
 
 
 ## Requirements
-The scripts assume the server is running on an AWS Ubuntu instance, which has git pre-installed. The following dependencies will be installed by the scripts if they are not already available:
+The scripts assume the server is running on an AWS Ubuntu instance, which has git pre-installed. The following dependencies will be installed by the scripts if they are not already available:  
 
-Java 21 (Headless) JDK and JRE 
-AWS CLI (Set/Get server files from S3)
-YQ (for parsing config.yaml)
-BuildTools (Spigot Only)
-Forge 52.0.x or Spigot 1.21.x
+Java 21 (Headless) JDK and JRE   
+AWS CLI (Set/Get server files from S3)  
+YQ (for parsing config.yaml)  
+BuildTools (Spigot Only)  
+Forge 52.0.x or Spigot 1.21.x  
 
 
 ## Installation
-To set up the Minecraft server on your AWS Ubuntu instance, follow these steps:
+To set up the Minecraft server on your AWS Ubuntu instance, follow these steps:  
 
 ### Clone the repository:
 ```
-git clone https://github.com/MegaBytten/MCServer_on_AWSUbuntu.git
-cd MCServer_on_AWSUbuntu
+git clone https://github.com/MegaBytten/MCServer_on_AWSUbuntu.git  
+cd MCServer_on_AWSUbuntu  
 
 ```
 
 ### Run the first-time setup script:
-The main setup script installs all required dependencies and sets up your Minecraft server.
+The main setup script installs all required dependencies and sets up your Minecraft server.  
 ```
-sudo bash firsttime_install.sh
+sudo bash firsttime_install.sh  
 ```
 
 ### Choose your Minecraft version:
-By default, the server will use the vanilla minecraft .jar specified in the config.yaml file. If you are hosting the minecraft vanilla, spigot, or forge .jar files not in /home/ubuntu/mcserver/, you must manually override this in the config.yaml, or in the /etc/systemd/system/minecraftserver.service systemd file. If you are hosting a spigot .jar in the /home/ubuntu/mcserver/ directory, you can simply pass "spigot" as a CLI arg into the "mcserver_systemd.sh" script like the following:
+By default, the server will use the vanilla minecraft .jar specified in the config.yaml file. If you are hosting the minecraft vanilla, spigot, or forge .jar files not in /home/ubuntu/mcserver/, you must manually override this in the config.yaml, or in the /etc/systemd/system/minecraftserver.service systemd file. If you are hosting a spigot .jar in the /home/ubuntu/mcserver/ directory, you can simply pass "spigot" as a CLI arg into the "mcserver_systemd.sh" script like the following:  
 ``` sudo bash firsttime_install.sh spigot ```
 
 
 ### Service Management:
-The setup script will create a systemd service to run the MC server, allowing for easy start, stop, and restart commands:
+The setup script will create a systemd service to run the MC server, allowing for easy start, stop, and restart commands:  
 ```
-sudo systemctl start minecraftserver
-sudo systemctl stop minecraftserver
-sudo systemctl restart minecraftserver
+sudo systemctl start minecraftserver  
+sudo systemctl stop minecraftserver  
+sudo systemctl restart minecraftserver  
 ```
 
 
 ## Configuration
-config.yaml
+config.yaml  
 > ubuntu_path - change this if home directory is not /home/ubuntu  
 > mcserver_memory - change this to vary the allocated memory to server in Megabytes  
 > mcserver_jar_vanilla - change this to specify the path to the executable vanilla MC server .jar file. Note: you will likely need to change the systemd minecraftserver.service "WorkingDirectory" field.  
 > mcserver_jar_spigot - change this to specify the path to the executable spigot MC server .jar file.  
 
 ### Mod and Plugin Installation
-Forge Mods: Mods can be found on CurseForge and must be placed in the mods/ directory inside the Minecraft server directory.
-Spigot Plugins: Plugins can be found on SpigotMC and must be placed in the plugins/ directory inside the Minecraft server directory.
-Make sure to restart the server after installing any mods or plugins.
+Forge Mods: Mods can be found on CurseForge and must be placed in the mods/ directory inside the Minecraft server directory.  
+Spigot Plugins: Plugins can be found on SpigotMC and must be placed in the plugins/ directory inside the Minecraft server directory.  
+Make sure to restart the server after installing any mods or plugins.  
 
 ###  Switching Between Forge and Spigot
-You can switch between Forge and Spigot by updating the Minecraft .jar file and restarting the server. If you modify the systemd service file, you must reload the systemctl daemon and restart the service:
+You can switch between Forge and Spigot by updating the Minecraft .jar file and restarting the server. If you modify the systemd service file, you must reload the systemctl daemon and restart the service:  
 """
 # Example: Switch to Spigot
-sudo bash firsttime_install.sh spigot
+sudo bash firsttime_install.sh spigot  
 
 # After updating the .service file, reload systemd
-sudo systemctl daemon-reload
-sudo systemctl restart minecraftserver
+sudo systemctl daemon-reload  
+sudo systemctl restart minecraftserver  
 """
 
 ## Troubleshooting
-If you encounter issues with server startup or mod/plugin installation, ensure the following:
+If you encounter issues with server startup or mod/plugin installation, ensure the following:  
 
-- The .jar file is compatible with the specified Minecraft version (1.21.x for Vanilla, Forge 52.0.x for modded servers).
-- Dependencies such as yq and Java are correctly installed (this is handled by the setup script).
-- Ensure that any mods or plugins are placed in the correct directories and are version-compatible.
+- The .jar file is compatible with the specified Minecraft version (1.21.x for Vanilla, Forge 52.0.x for modded servers).  
+- Dependencies such as yq and Java are correctly installed (this is handled by the setup script).  
+- Ensure that any mods or plugins are placed in the correct directories and are version-compatible.  
 
 ## Project Structure
-├── firsttime_install.sh         # Main script for the initial Minecraft server setup
-├── firsttime_spigot.sh          # Spigot-specific setup script
-├── firsttime_forge.sh           # Forge-specific setup script
-├── forgemods_install.sh         # Script to install mods for a Forge server
-├── mcserver_systemd.sh          # Script to configure the Minecraft server as a systemd service
-├── s3upload.sh                  # Script to upload Minecraft server files to AWS S3
-├── config.yaml                  # Configuration file for server settings
-└── minecraftserver.service      # Systemd service file for managing the Minecraft server
+├── firsttime_install.sh         # Main script for the initial Minecraft server setup  
+├── firsttime_spigot.sh          # Spigot-specific setup script  
+├── firsttime_forge.sh           # Forge-specific setup script  
+├── forgemods_install.sh         # Script to install mods for a Forge server  
+├── mcserver_systemd.sh          # Script to configure the Minecraft server as a systemd service  
+├── s3upload.sh                  # Script to upload Minecraft server files to AWS S3  
+├── config.yaml                  # Configuration file for server settings  
+└── minecraftserver.service      # Systemd service file for managing the Minecraft server  
 
 - firsttime_install.sh:
     - Purpose: This is the main setup script for initializing a Minecraft server on an AWS Ubuntu instance. It installs necessary dependencies (Java, YQ, AWS CLI), downloads the Minecraft server files from an S3 bucket, and configures the server directory.
