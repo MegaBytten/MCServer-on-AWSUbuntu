@@ -79,8 +79,6 @@ Make sure to restart the server after installing any mods or plugins.
 You can switch between Forge and Spigot by updating the Minecraft .jar file and restarting the server. If you modify the systemd service file, you must reload the systemctl daemon and restart the service:  
 """
 sudo bash firsttime_install.sh spigot  
-
-// After updating the .service file, reload systemd
 sudo systemctl daemon-reload  
 sudo systemctl restart minecraftserver  
 """
