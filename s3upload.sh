@@ -10,7 +10,9 @@ fi
 ARG1=$1
 
 # Upload to unique folder for this specific version
-sudo aws s3 sync ~/mcserver/ s3://megabyttenpersonalmcserverbackups/$ARG1
+DATESTAMP=$(date +"%Y%m%d")
+
+sudo aws s3 sync ~/mcserver/ s3://megabyttenpersonalmcserverbackups/$DATESTAMP_$ARG1
 
 # Update s3::/latest too
 sudo aws s3 sync ~/mcserver/ s3://megabyttenpersonalmcserverbackups/latest --delete
