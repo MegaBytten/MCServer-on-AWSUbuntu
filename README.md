@@ -58,10 +58,10 @@ sudo systemctl restart minecraftserver
 
 ## Configuration
 config.yaml
-> ubuntu_path - change this if home directory is not /home/ubuntu
-> mcserver_memory - change this to vary the allocated memory to server in Megabytes
-> mcserver_jar_vanilla - change this to specify the path to the executable vanilla MC server .jar file. Note: you will likely need to change the systemd minecraftserver.service "WorkingDirectory" field.
-> mcserver_jar_spigot - change this to specify the path to the executable spigot MC server .jar file.
+> ubuntu_path - change this if home directory is not /home/ubuntu  
+> mcserver_memory - change this to vary the allocated memory to server in Megabytes  
+> mcserver_jar_vanilla - change this to specify the path to the executable vanilla MC server .jar file. Note: you will likely need to change the systemd minecraftserver.service "WorkingDirectory" field.  
+> mcserver_jar_spigot - change this to specify the path to the executable spigot MC server .jar file.  
 
 ### Mod and Plugin Installation
 Forge Mods: Mods can be found on CurseForge and must be placed in the mods/ directory inside the Minecraft server directory.
